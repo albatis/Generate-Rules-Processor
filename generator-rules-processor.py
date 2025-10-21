@@ -1,6 +1,7 @@
 import pandas as pd
 from mlxtend.preprocessing import TransactionEncoder
-from mlxtend.frequent_patterns import apriori, association_rules
+#from mlxtend.frequent_patterns import apriori, association_rules
+from mlxtend.frequent_patterns import fpgrowth, association_rules
 import pickle
 import os
 import time
@@ -36,7 +37,8 @@ def main():
     print(f"Encoded: [{end - start:.2f} s]")
 
     start = time.time()
-    frequent_itemsets = apriori(df_encoded, min_support=min_support, use_colnames=True)
+    #frequent_itemsets = apriori(df_encoded, min_support=min_support, use_colnames=True)
+    frequent_itemsets = fpgrowth(df_encoded, min_support=min_support, use_colnames=True)
     end = time.time()
     print(f" {len(frequent_itemsets)} conjuntos de itens frequentes: [{end - start:.2f} s]")
 
